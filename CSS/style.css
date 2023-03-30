@@ -39,3 +39,17 @@ p {
     font-family: Philosopher;
     border: 1px solid blue;
 }
+.number_film{
+    background-color: rgb(235, 188, 130);
+}
+.number_films{
+    font-size: 20px;
+    color: blue;
+}
+.number{
+    color: rgb(238, 255, 1);
+}
+.russian_title{
+    font-size: 19px;
+    color: rgb(22, 7, 155);
+}

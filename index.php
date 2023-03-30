@@ -41,7 +41,7 @@
             <div>
                 <p>
                     Для начала снова создадим переменную с подключением к нашему файлу XML<br>
-                    $xml=simple.load.file("XML/movies.xml") or die ("Error:Cannot greate object");<br><br>
+                    $xml=simplexml_load_file("XML/movies.xml") or die ("Error:Cannot greate object");<br><br>
                     Затем выведем в браузер количество фильмов в нашем файле<br>
                     echo count($xml);
                 </p>
@@ -63,7 +63,7 @@
                 </p>
                 <p>
                     foreach($xml as $movies_key=>$movie){<br>
-                    echo $movie->title.russian."/br>";<br>
+                    echo $movie->title_russian."/br>";<br>
                     }<br>
                 </p>
                 <p>
@@ -72,10 +72,38 @@
                     Вот и все.
                 </p>
             </div>
+            <div class="">
+                <p>
+                    Теперь немного допишем, а именно давайте повторим ранее полученные знания и снова выведим все содержимое нашего файл XML.<br>
+                    Допишем наш код:<br>
+                    echo "pre>";<br>
+                    print_r($xml);
+                    echo "/pre>";
+                </p>
+                <p>
+                    Теперь смотрим в наш браузер на результат.<br>
+                    Давайте немного усложним и при выводе в браузер выделим выведенные данные с названиями фильмов в отдельный блок, а список всех фильмов в другой.
+                </p>
+            </div>
 
         </div>
     </section>
-    <section class=""></section>
+    <section class="code_php_first">
+        <div class="number_film">
+            <?php
+            $xml = simplexml_load_file("XML/movies.xml") or die("Error:Cannot greate object");
+            echo "<p class='number_films'>" . "В нашем файле XML список из " . "<span class='number'>" . count($xml) . "</span>" . " фильмов и сериалов." . "</p>";
+
+            echo "<p class='russian_title'>" . "Список фильмов с названиями на русском языке:" . "</p>";
+
+            foreach ($xml as $mivies_key => $movie) {
+                echo "<p class='russian_title'>" .  $movie->title_russian . "<br>" . "</p>";
+            }
+            ?>
+        </div>
+        <div class="rissia_title"></div>
+        <div class="all_film"></div>
+    </section>
     <section class=""></section>
 
     <footer></footer>
