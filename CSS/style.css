@@ -41,10 +41,11 @@ p {
 }
 .number_film{
     background-color: rgb(235, 188, 130);
+    text-align: center;
 }
 .number_films{
     font-size: 20px;
-    color: blue;
+    color: blue;    
 }
 .number{
     color: rgb(238, 255, 1);
@@ -52,4 +53,15 @@ p {
 .russian_title{
     font-size: 19px;
     color: rgb(22, 7, 155);
+    text-transform: uppercase;
+}
+.russian_title_1{
+    font-size: 14px;
+    color: rgb(22, 7, 155);
+}
+.inform{
+    text-align: center;
+    border: 2px solid red;
+    background-color:rgb(126, 126, 235);
+    color: blueviolet;
 }

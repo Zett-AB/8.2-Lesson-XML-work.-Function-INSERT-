@@ -89,21 +89,42 @@
         </div>
     </section>
     <section class="code_php_first">
-        <div class="number_film">
-            <?php
-            $xml = simplexml_load_file("XML/movies.xml") or die("Error:Cannot greate object");
-            echo "<p class='number_films'>" . "В нашем файле XML список из " . "<span class='number'>" . count($xml) . "</span>" . " фильмов и сериалов." . "</p>";
+        <div class="main_php">
+            <div class="number_film">
+                <?php
+                $xml = simplexml_load_file("XML/movies.xml") or die("Error:Cannot greate object");
+                echo "<p class='number_films'>" . "В нашем файле XML список из " . "<span class='number'>" . count($xml) . "</span>" . " фильмов и сериалов." . "</p>";
 
-            echo "<p class='russian_title'>" . "Список фильмов с названиями на русском языке:" . "</p>";
+                echo "<p class='russian_title'>" . "Список фильмов с названиями на русском языке:" . "</p>";
 
-            foreach ($xml as $mivies_key => $movie) {
-                echo "<p class='russian_title'>" .  $movie->title_russian . "<br>" . "</p>";
-            }
-            ?>
+                foreach ($xml as $mivies_key => $movie) {
+                    echo "<p class='russian_title_1'>" .  $movie->title_russian . "<br>" . "</p>";
+                }
+                // echo "<pre>";
+                // print_r($xml);
+                // echo "</pre>";
+                ?>
+            </div>
         </div>
-        <div class="rissia_title"></div>
+        <div class="inform">
+            <p>
+                ВАЖНО!<br>
+                Часть кода касающуюся вывода всего списка фильмов, закомментирована, в целях сокращения размера секции :)
+            </p>
+        </div>
+    </section>
+    <section class="work_mysql">
+        <h4>
+            Работа с БД в MySQL
+        </h4>
+        <div class="table_sql">
+            <p>
+                Для того, чтобы воспользоваться имеющейся у нас информацией с XML файла, нам необходимо
+            </p>
+        </div>
         <div class="all_film"></div>
     </section>
+    <section class=""></section>
     <section class=""></section>
 
     <footer></footer>
