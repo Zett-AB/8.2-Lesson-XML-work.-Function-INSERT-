@@ -119,12 +119,140 @@
         </h4>
         <div class="table_sql">
             <p>
-                Для того, чтобы воспользоваться имеющейся у нас информацией с XML файла, нам необходимо
+                Для того, чтобы воспользоваться имеющейся у нас информацией с XML файла, нам необходимо будет первоначально подготовить нашу БД, а конкретно таблицу movie.
             </p>
+            <p>
+                Заходим в административную панель управления phpMyAdmin и активируем мышкой совю БД, в моем случаи это study7.2lesson.<br>
+                Чтобы сохранить нашу таблицу movie, которую мы создали и использовали на предыдущих занятиях, мы создадим новую аналогичную таблицу и назовем её movie_list.<br>
+                Эта таблица будет содержать те же стоблцы, что и таблица movie и к ним мы добавми новые.<br>
+                Ну, а те кто хочет можем оставить старую таблицу movie и удалив из неё все данные, добавить новые столбцы по аналогии.
+            </p>
+            <p>
+                Создаем новую таблицу movie_list, для этого жмем в левой панели управления прямо под названием нашей БД на вкладку "Новая" и у нас сразу открывается окно для создания новой таблицы.<br>
+                В поле "Имя таблицы" пишем название нашей таблицы - movie_list.<br>
+                Теперь переходим к заполнению столбцов, они у нас будут таким же как у таблицы movie, а именно:
+            </p>
+            <ul>
+                <li>
+                    первая строка(столбец в таблице) в поле "Имя" пишем - id, в поле "Тип" - INT, в поле "Длина/Значение" - 5, в поле "Индекс" - PRIMERY, в параметре "AI" ставим галочку;
+                </li>
+                <li>
+                    вторая строка(столбец в таблице) в поле "Имя" пишем - name, в поле "Тип" - VARCHAR, в поле "Длина/Значение" - 255;
+                </li>
+                <li>
+                    третья строка(столбец в таблице) в поле "Имя" пишем - descriptions, в поле "Тип" - TEXT, в поле "Длина/Значение" - 500;
+                </li>
+                <li>
+                    четвертая строка(столбец в таблице) в поле "Имя" пишем - year, в поле "Тип" - INT, в поле "Длина/Значение" - 5;
+                </li>
+                <li>
+                    пятая строка(столбец в таблице) в поле "Имя" пишем - add_date, в поле "Тип" - DATA_TIME;
+                </li>
+                <li>
+                    шестая строка(столбец в таблице) в поле "Имя" пишем - сcategory_id, в поле "Тип" - tinyint, в поле "Длина/Значение" - 4;
+                </li>
+            </ul>
+            <p>
+                Теперь добавми новые столбцы в нашу вышеуказанную таблицу, а именно:
+            </p>
+            <ul>
+                <li>
+                    седьмая строка(столбец в таблице) в поле "Имя" пишем - rating, в поле "Тип" - float, в поле "Длина/Значение" - 4;
+                </li>
+                <li>
+                    восьмая строка(столбец в таблице) в поле "Имя" пишем - poster, в поле "Тип" - VARCHAR, в поле "Длина/Значение" - 255;
+                </li>
+            </ul>
+            <p>
+                После создания нашей новый таблицы - movie_list, сохраняем её и переходим в наш файл index.php, для написания кода.
+            </p>
+            <p></p>
         </div>
-        <div class="all_film"></div>
     </section>
-    <section class=""></section>
+    <section class="code_php_secnd">
+        <div class="add_code">
+            <h5>
+                Код для вставки данных из XML файла в таблицу movie_list БД
+            </h5>
+            <div class="func_1">
+                <p>
+                    Теперь переходимм непосредственно к написанию кода.<br>
+                    Чтобы вставить данные из XML файла в нашу таблицу movie_list, нам необходимо будет написать функцию.
+                </p>
+                <p>
+                    И так начинаем пишем function(т.е. функция), далее даем ей название(по факту мы используем функцию insert и её название и пишем).<br>
+                    Открываем скобки в которых пишем переменные нашей таблицы movie_list, а имеено($name, $descriptions, $year, $rating, $poster, $category_id).<br>
+                    Затем в условиях функции(т.е. в фигурных скобках) пишем код подключения нашей БД, а именно<br>
+                    { $mysqli=new mysqli('localhost', 'root', '', 'study7.2lesson');<br><br>
+                    теперь напишем функцию проверки подключения/соединения нашей БД<br>
+                    if (mysqli_connect_errno()){print_f('Соединение не установлено', mysqli_connect_error()); exie();}<br><br>
+                    теперь указываем кодировку<br>
+                    $mysqli->set_charset('utf8');<br><br>
+                    Теперь нам надо написать запрос:<br>
+                    $query="INSERT INTO movie_list VALUES(null, '$name', '$descriptions', '$year', '$rating', '$poster', Now(), '$category_id')";<br><br>
+                    Далее выводим переменную 'результ' - $result<br>
+                    $result=false;<br><br>
+                    Теперь напишем проверку на переменную $result<br>
+                    if($mysqli->query($query)){<br>
+                    $result=true;<br>
+                    }<br>
+                    return $result;<br>
+                    }
+                </p>
+                <p>
+                    Все наша функция для записи данных из файла xml в нашу БД готова.
+                </p>
+                <p>
+                    Ниже смотрим как должен выглядеть наш код без пояснений.
+                </p>
+                <p>
+                    function insert($name, $descriptions, $year, $rating, $poster, $category_id){<br>
+                    $mysqli=new mysqli('localhost', 'root', '', 'study7.2lesson');<br>
+                    if (mysqli_connect_errno()){<br>
+                    print_f('Соединение не установлено', mysqli_connect_error());<br>
+                    exit();}<br>
+                    $mysqli->set_charset('utf8');<br>
+                    $query="INSERT INTO movie_list VALUES(null, '$name', '$descriptions', '$year', '$rating', '$poster', Now(), '$category_id')";<br>
+                    $result=false;<br>
+                    if($mysqli->query($query)){<br>
+                    $result=true;<br>
+                    }<br>
+                    return $result;<br>
+                    }
+                </p>
+            </div>
+            <div class="check_code">
+                <p>
+                    Теперь проверим наш код ниже.
+                </p>
+                <?php
+                function insert($name, $desc, $year, $category_id, $rating, $poster)
+                {
+                    $mysqli = new mysqli('localhost', 'root', '', 'study7.2lesson');
+                    if (mysqli_connect_errno()) {
+                        printf('Соединение не установлено', mysqli_connect_error());
+                        exit();
+                    }
+                    $mysqli->set_charset('utf8');
+
+                    $query = "INSERT INTO movie_list VALUES(null, '$name', '$desc', '$year',  Now(), '$category_id', '$rating', '$poster')";
+
+                    $result = false;
+
+                    if ($mysqli->query($query)) {
+                        $result = true;
+                    }
+                    return $result;
+                }
+                ?>
+            </div>
+            <div class="">
+                <p>
+                    На этом задании мы создали только функцию, но не подключили к ней файл xml, об этом мы будем говорить на следующем занятии.
+                </p>
+            </div>
+        </div>
+    </section>
     <section class=""></section>
 
     <footer></footer>
